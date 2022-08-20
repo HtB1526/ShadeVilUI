@@ -41,13 +41,15 @@ if not writefile or not isfile then
 	_print("ShadeVil UI","Your executor cannot run lib, reason: missing isfile/writefile","null")
 	IsLibSupported = false
 end
-local sro = setreadonly or makereadonly or make_readonly
-if not sro then 
+local sro = setreadonly 
+local mro = makereadonly or make_readonly
+if not sro or not mro then 
 	_print("ShadeVil UI","Your executor cannot run lib, reason: missing readonly functions","null")
 	IsLibSupported = false
 end
 if not IsLibSupported then return end
 _print("ShadeVil UI","Your executor is can load Library!","null")
+local function ReadOnlyShit(t,v)if sro then sro(t,v)else mro(t)end end
 ShadeVilTable.IsActive=true
 local function RandomString(l)
 	local data = ""
@@ -188,7 +190,9 @@ function ShadeVilTable:CreateWindow(Tittle,AutoTheme)
 	function e:Destroy()
 		ae = false 
 		e:Theme("","save")
+		ReadOnlyShit(ShadeVilTable,false)
 		ShadeVilTable.IsActive=false
+		ReadOnlyShit(ShadeVilTable,true)
 		Ayyyyyyyyyyyyyy:Destroy()
 	end
 	local function CreateCircle(Object)
@@ -1337,11 +1341,11 @@ function ShadeVilTable:CreateWindow(Tittle,AutoTheme)
 				end)
 			end
 		end
-		setreadonly(ae,true)
+		ReadOnlyShit(ae,true)
 		return ae
 	end
-	setreadonly(e,true)
+	ReadOnlyShit(e,true)
 	return e
 end
-setreadonly(ShadeVilTable,true)
+ReadOnlyShit(ShadeVilTable,true)
 return ShadeVilTable

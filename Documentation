@@ -1,0 +1,18 @@
+ShadeVil UI 1.01 Library Documentation
+In Docs: 4/12 function
+-------------------------------------------------------------------------------------------------------------
+<table Created_UI> ShadeVil:CreateWindow(<string> Title,<bool> IsCanAutomaticLoadTheme)
+[I]: <bool> IsCanAutomaticLoadTheme is already setted to false
+[EXAMPLES]: ShadeVil:CreateWindow("ShadeVil UI Library!"), ShadeVil:CreateWindow("ShadeVil UI Library!",true)
+-------------------------------------------------------------------------------------------------------------
+<null> ShadeVil:Theme(<Color3?> Color,<string> Type)
+[I]: Sets Color for Type
+[I]: Types: topbar,tabs,background,shadow,reset,text,save and load
+[EXAMPLES]: ShadeVil:Theme("","Load"), ShadeVil:Theme(Color3.new(1,1,1),"topbar")
+-------------------------------------------------------------------------------------------------------------
+<null> ShadeVil:Destroy(<null>)
+[I]: Destroys UI
+-------------------------------------------------------------------------------------------------------------
+<table Page> Created_UI:CreatePage(<string> Title)
+[EXAMPLE]: Created_UI:CreatePage("Hi")
+-------------------------------------------------------------------------------------------------------------

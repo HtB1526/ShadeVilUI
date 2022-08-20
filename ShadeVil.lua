@@ -1,10 +1,13 @@
 --[[
 	[*]: ShadeVil UI Library, an fork of "Not anton" library that he using
-	[*]: version: 1.00
+	[*]: version: 1.01
 	[*]: By HtB#1526
+    **********************************************************************
+	// Change Log:
+	Added "IsActive" to Table and fixed readonly funcs
 ]]
 local ShadeVilTable = {
-	Log={},ShadeVilVersion="1.00"
+	Log={},ShadeVilVersion="1.01",IsActive = false
 }
 local function _print(Name,str,INTERNAME)
 	local iserr,isinf,iswar
@@ -38,11 +41,14 @@ if not writefile or not isfile then
 	_print("ShadeVil UI","Your executor cannot run lib, reason: missing isfile/writefile","null")
 	IsLibSupported = false
 end
-if not setreadonly then 
-	_print("ShadeVil UI","Your executor cannot run lib, reason: missing setreadonly","null")
+local sro = setreadonly or makereadonly or make_readonly
+if not sro then 
+	_print("ShadeVil UI","Your executor cannot run lib, reason: missing readonly functions","null")
 	IsLibSupported = false
 end
 if not IsLibSupported then return end
+_print("ShadeVil UI","Your executor is can load Library!","null")
+ShadeVilTable.IsActive=true
 local function RandomString(l)
 	local data = ""
 	for i=0,l,1 do
@@ -161,7 +167,7 @@ function ShadeVilTable:CreateWindow(Tittle,AutoTheme)
 			writefile("ShadeVil UI settings.json",  game:GetService("HttpService"):JSONEncode(ToWrite)) --// yeah from Unnamed ESP because "Not anton" is shit-coder
 		elseif Type == "load" then
 			if not isfile"ShadeVil UI settings.json"then
-				ShadeVilTable.Log:Info("First time use? Check ShadeVil UI settings.json in your exploit workspace folder")
+				ShadeVilTable.Log:Info("First time use? 'Check ShadeVil UI settings.json' in your exploit workspace folder")
 				writefile("ShadeVil UI settings.json",game:GetService("HttpService"):JSONEncode({Message="No settings"}))
 			end
 			local j = game:GetService("HttpService"):JSONDecode(readfile("ShadeVil UI settings.json"))
@@ -182,6 +188,7 @@ function ShadeVilTable:CreateWindow(Tittle,AutoTheme)
 	function e:Destroy()
 		ae = false 
 		e:Theme("","save")
+		ShadeVilTable.IsActive=false
 		Ayyyyyyyyyyyyyy:Destroy()
 	end
 	local function CreateCircle(Object)

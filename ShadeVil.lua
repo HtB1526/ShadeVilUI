@@ -43,7 +43,7 @@ if not writefile or not isfile then
 end
 local sro = setreadonly 
 local mro = makereadonly or make_readonly
-if not sro or not mro then 
+if not sro then 
 	_print("ShadeVil UI","Your executor cannot run lib, reason: missing readonly functions","null")
 	IsLibSupported = false
 end
